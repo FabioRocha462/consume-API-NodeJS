@@ -26,7 +26,7 @@ model Licitacao {
 
 model Datas{
   id      Int      @id @default(autoincrement())
-  data DateTime? 
+  data_licitacao DateTime? 
   data_fonte DateTime?
   licitacao Licitacao @relation(fields :[licitacaoId],references: [id], onDelete: NoAction, onUpdate:NoAction, map:"posts_ibfk_1")
   licitacaoId Int
