@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Licitacao {
+  id      Int      @id @default(autoincrement())
+  orgao String?
+  titulo String?
+  estado String?
+  Cidade String?
+  objeto String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  datas Datas[]
+
+  @@map("licitacoes")
+}
+
+model Datas{
+  id      Int      @id @default(autoincrement())
+  data DateTime? 
+  data_fonte DateTime?
+  licitacao Licitacao @relation(fields :[licitacaoId],references: [id], onDelete: NoAction, onUpdate:NoAction, map:"posts_ibfk_1")
+  licitacaoId Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  @@index([licitacaoId], map: "licitacaoId")
+  @@map("datas")
+}
